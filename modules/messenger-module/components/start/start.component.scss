@@ -1,0 +1,50 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include payever_absolute(0);
+  left: $pe_hgrid_gutter * 10;
+  @include pe_flexbox();
+  @include pe_align-items(center);
+  padding: $pe_hgrid_gutter $pe_hgrid_gutter $pe_hgrid_gutter $pe_hgrid_gutter * 4;
+  background-color: rgba(255,255,255,0.5);
+}
+.text-side {
+  flex: 1;
+  max-width: $pe_hgrid_gutter * 22;
+}
+.image_wrapper {
+  flex: 1;
+  height: 80%;
+  overflow: hidden;
+  margin-right: -$pe_hgrid_gutter;
+}
+.image {
+  height: 100%;
+  display: block;
+}
+.text-bold {
+  font-weight: bold;
+}
+.btn-start {
+  padding: 0 $pe_vgrid_height * 6;
+  height: $pe_hgrid_gutter * 2;
+  line-height: $pe_hgrid_gutter * 2;
+  font-weight: bold;
+  border-radius: $pe_border_radius * 2;
+  background-color: rgba(255,255,255,.5);
+  margin-top: $pe_hgrid_gutter;
+}
+
+@media screen and (max-width: $pe_viewport_breakpoint_sm_3) {
+  :host {
+    @include pe_flex-direction(column);
+    padding: $pe_hgrid_gutter;
+  }
+  .image_wrapper {
+    height: auto;
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
+  }
+}

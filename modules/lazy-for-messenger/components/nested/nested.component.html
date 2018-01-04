@@ -1,0 +1,66 @@
+<div class="container-fluid no-margin selected-bar" *ngIf="selectedContacts.length">
+    <div class="col-xs-1">
+      <button class="btn btn-primary" (click)="unselectSelectedContacts()">
+        <svg class="icon icon-16"><use xlink:href="#icon-x-16"></use></svg>
+      </button>
+    </div>
+    <div class="col-xs-1">
+      <button class="btn btn-primary" [innerHtml]="'Selected' + ' ' + selectedContacts.length"></button>
+    </div>
+    <div class="col-xs-10 text-right">
+      <button class="btn btn-primary" (click)="sendSelectedContacts()">
+        Create conversation
+      </button>
+    </div>
+</div>
+<div class="container-fluid no-margin">
+  <div class="row contacts-rows">
+    <div class="col-xs-2">
+      <button class="btn btn-link btn-inline btn-default" (click)="changeContactsDirection('firstName')">
+        <span>Name</span>
+        <svg class="icon icon-16" *ngIf="contactsSortingType === 'firstName' && contactsDirection === 'asc'">
+          <use xlink:href="#icon-arrow-down-16"></use>
+        </svg>
+        <svg class="icon icon-16" *ngIf="contactsSortingType === 'firstName' && contactsDirection === 'desc'">
+          <use xlink:href="#icon-arrow-up-16"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="col-sm-5 col-sm-offset-5 hidden-xs">
+      <button class="btn btn-link btn-inline btn-default" (click)="changeContactsDirection('email')">
+        <span>Email</span>
+        <svg class="icon icon-16" *ngIf="contactsSortingType === 'email' && contactsDirection === 'asc'">
+          <use xlink:href="#icon-arrow-down-16"></use>
+        </svg>
+        <svg class="icon icon-16" *ngIf="contactsSortingType === 'email' && contactsDirection === 'desc'">
+          <use xlink:href="#icon-arrow-up-16"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid no-margin scroll-container" scrollEndDetection (scrollEnd)="loadNextPageOfContacts()">
+  <div class="row contacts-rows" *ngFor="let contact of contactsList; let i = index">
+    <div class="col-xs-1 text-center">
+      <div class="form-widget form-design pe-bootstrap inline-block">
+        <input type="checkbox" id="list-item-{{contact.id}}"
+               [checked]="contact.selected"
+               [disabled]="newConversationType === 'private' && selectedContacts.length === 1 && !contact.selected"
+               (change)="contactChangeState(contact)">
+        <label for="list-item-{{contact.id}}"></label>
+      </div>
+    </div>
+    <div class="col-xs-2 col-sm-1">
+      <span class="profile-default profile-32 img-circle inline-block">
+          <img class="profile-32 img-circle" *ngIf="contact.avatar_url" src="{{contact.avatar_url}}">
+          <svg class="icon icon-32" *ngIf="!contact.avatar_url"><use xlink:href="#icon-user-32"></use></svg>
+        </span>
+    </div>
+    <div class="col-xs-9 col-sm-5">
+        <h4 class="no-margin" [innerHtml]="contact.first_name + ' ' + contact.last_name"></h4>
+    </div>
+    <div class="col-sm-5 hidden-xs">
+      <span [innerHtml]="contact.email"></span>
+    </div>
+  </div>
+</div>

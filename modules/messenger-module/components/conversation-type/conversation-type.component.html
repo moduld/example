@@ -1,0 +1,31 @@
+<div class="component_wrapper">
+  <div class="loader_64" *ngIf="isLoaderActive"></div>
+  <div class="search_container">
+    <ui-search (inputSearch)="getModelChange($event)"></ui-search>
+  </div>
+  <h3 class="text-center text-secondary" *ngIf="!conversationslist.length && !isLoaderActive">You don´t have conversations yet. Create a new one by clicking the button below.</h3>
+  <div class="contacts">
+    <div  (click)="forwardTo(conversation)" *ngFor="let conversation of conversationslist | conversationsFilter: searchConversationValue">
+      <p class="subheading contact"
+         [routerLink]="['./', {outlets: {'chat_outlet': [conversation.uuid]}}]"
+         routerLinkActive="active_contact" [ngClass]="{'not-clickable': forwardToMessage}">
+        <span [innerHtml]="conversation.name || conversation.participants[0].name || 'Unnamed'"></span>
+        <span class="date" *ngIf="!conversation.new_messages_count" [innerHtml]="conversation.last_message_time | lastMessage"></span>
+        <span class="circle_element text-center text-secondary" *ngIf="conversation.new_messages_count" [innerHtml]="conversation.new_messages_count"></span>
+      </p>
+    </div>
+  </div>
+<div class="row with_line">
+  <button type="button" class="col-xs-12 btn btn-default btn-link btn-vmargin" *ngIf="currentMonolithUserSlug"
+          [routerLink]="['./', {outlets: {'contacts_outlet': ['contacts', currentGroup, currentConversationType, currentMonolithUserSlug]}}]">
+    <svg class="icon icon-24">
+      <use xlink:href="#icon-msgr-plus-24"></use>
+    </svg>
+  </button>
+</div>
+</div>
+<div class="tip_position" [ngClass]="{'forward_to_tip': forwardToMessage}" *ngIf="isTipShown">
+  <h1 class="text-secondary text-center" [innerHtml]="tipText"></h1>
+</div>
+<router-outlet name="chat_outlet"></router-outlet>
+<router-outlet name="contacts_outlet"></router-outlet>

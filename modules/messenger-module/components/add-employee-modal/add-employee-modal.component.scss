@@ -1,0 +1,8 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+.content-wrapper {
+  @include payever_absolute(0);
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+}

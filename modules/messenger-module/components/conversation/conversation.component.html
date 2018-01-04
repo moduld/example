@@ -1,0 +1,36 @@
+<ui-icons-messenger></ui-icons-messenger>
+<ui-layout-app [noPadding]="true" [noHeaderBorder]="true">
+  <ui-layout-header header [notTransparent]="true">
+    <div col-left>
+      <a (click)="goToDashboard()">
+        <svg class="icon icon-24">
+          <use xlink:href="#icon-dashboard-24"></use>
+        </svg>
+      </a>
+    </div>
+    <div col-center>
+      <div class="modal-title">
+        <img src="~@pe/ui-kit/icons-db/icon-support-colored-64.png" alt="" class="icon icon-48">
+      </div>
+    </div>
+  </ui-layout-header>
+    <div class="messenger_main">
+      <aside class="aside" [ngClass]="{'exquisite': thinkledAside}" *ngIf="isUserBusiness">
+        <div class="container-fluid">
+            <button type="button" class="btn btn-default btn-bold btn-link btn-lg" routerLink="./customer" routerLinkActive="btn-primary">
+              <svg class="icon icon-24"><use xlink:href="#icon-msgr-user-24"></use></svg>
+              <span [hidden]="thinkledAside">Customers</span>
+            </button>
+            <button type="button" class="btn btn-default btn-bold btn-link btn-lg" routerLink="./support" routerLinkActive="btn-primary">
+              <svg class="icon icon-24"><use xlink:href="#icon-msgr-assistance-24"></use></svg>
+              <span [hidden]="thinkledAside">Live support</span>
+            </button>
+            <button type="button" class="btn btn-default btn-bold btn-link btn-lg" routerLink="./team" routerLinkActive="btn-primary">
+              <svg class="icon icon-24"><use xlink:href="#icon-msgr-group-24"></use></svg>
+              <span [hidden]="thinkledAside">Team</span>
+            </button>
+        </div>
+      </aside>
+        <router-outlet></router-outlet>
+    </div>
+</ui-layout-app>

@@ -1,0 +1,23 @@
+<ui-modal
+        #modal
+        [baseViewConfig]="'large'"
+        [viewConfig]="{classes: {modalBody : 'zero-padding full-height'}}"
+        (onClose)="back()">
+<div class="content-wrapper">
+  <form novalidate
+        [formGroup]="newConversationForm"
+        (ngSubmit)="createConversation()"
+        [ngClass]="{'hidden': activatedConversationType === 'user-account'}">
+    <ui-form-row [rowProperty]="{
+                   rowClassName: 'col-xs-12 col-md-6',
+                   label: 'Conversation name',
+                   required: true
+                 }"
+                 [fieldValue]="newConversationForm.get('name').value"
+                 [fieldError]="newConversationForm.getError('name')">
+      <input type="text" class="form-control" placeholder="Conversation name" formControlName="name">
+    </ui-form-row>
+  </form>
+  <router-outlet></router-outlet>
+</div>
+</ui-modal>

@@ -1,0 +1,34 @@
+<div class="container-fluid full-height">
+  <div class="row full-height">
+    <div class="col-xs-5 col-sm-4 col-md-3 full-height aside">
+
+      <div class="row selector">
+        <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-default  btn-link btn-vmargin" routerLink="../notifications"
+                  routerLinkActive="btn-primary" [innerHtml]="'aside.notifications' | translate">
+          </button>
+        </div>
+        <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-default  btn-link btn-vmargin" routerLink="../overview"
+                  routerLinkActive="btn-primary" [innerHtml]="'aside.overview' | translate">
+          </button>
+        </div>
+      </div>
+      <div class="row contacts_list_wrapp">
+        <div class="loader_64" *ngIf="isLoaderActive"></div>
+        <p class="col-xs-12 text-secondary contact" *ngFor="let app of applications" routerLink="{{app.uuid}}"
+           routerLinkActive="active_contact" [innerHtml]="app.name"></p>
+      </div>
+    </div>
+    <div class="col-xs-7 col-sm-8 col-md-9 full-height">
+      <div class="contauner-fluid full-height">
+        <div class="row full-height">
+          <div class="output_window full-height">
+            <router-outlet></router-outlet>
+            <h1 class="select_title text-secondary" *ngIf="haveActiveApp" [innerHtml]="'aside.select_application' | translate"></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

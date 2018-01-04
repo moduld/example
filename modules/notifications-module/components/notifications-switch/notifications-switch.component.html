@@ -1,0 +1,95 @@
+<div class="container-fluid margin-null filters-bar">
+  <div class="row">
+    <div class="col-xs-5 col-xs-offset-4">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-design form-widget labeled">
+            <select class="form-control" id="reciverSelect" [(ngModel)]="filterReciever">
+              <option value="" [innerHtml]="'notifications-switch.all' | translate"></option>
+              <option [ngValue]="['private', 'business']"
+                      [innerHtml]="'notifications-switch.both' | translate"></option>
+              <option [ngValue]="['business']" [innerHtml]="'notifications-switch.business' | translate"></option>
+              <option [ngValue]="['private']" [innerHtml]="'notifications-switch.private' | translate"></option>
+            </select>
+            <label class="control-label small" for="reciverSelect"
+                   [innerHtml]="'notifications-switch.reciver' | translate"></label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-design form-widget labeled">
+            <select class="form-control" id="triggerSelect" [(ngModel)]="filterTrigger">
+              <option value="" [innerHtml]="'notifications-switch.all' | translate"></option>
+              <option *ngFor="let trig of triggers" [value]="trig.uuid" [innerHtml]="trig.name"></option>
+            </select>
+            <label class="control-label small" for="triggerSelect"
+                   [innerHtml]="'notifications-switch.trigger' | translate"></label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-design form-widget labeled">
+            <select class="form-control" id="reminderSelect" [(ngModel)]="filterReminder">
+              <option value="" [innerHtml]="'notifications-switch.all' | translate"></option>
+              <option *ngFor="let reminderValue of reminderValues" [value]="reminderValue" [innerHtml]="reminderValue | days"></option>
+            </select>
+            <label class="control-label small" for="reminderSelect"
+                   [innerHtml]="'notifications-switch.reminder' | translate"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid margin-null content-container">
+  <div class="loader_64" *ngIf="isLoaderActive"></div>
+  <div class="row terminal-list vertical-alighn" *ngFor="let notification of notifications | notificationFilter:filterReciever:filterTrigger:filterReminder:startPipeWorkParam; let i = index">
+    <div class="col-xs-1 text-center">
+      <img class="profile-48" [src]="notification.application.logo" alt="">
+    </div>
+    <div class="col-xs-3">
+      <b [innerHtml]="notification.headline"></b>
+      <p class="text-secondary margin-null" [innerHtml]="notification.subline"></p>
+    </div>
+    <div class="col-xs-5">
+      <div class="row">
+        <div class="col-xs-4 text-center">
+          <span class="text_labels text-capitalize"
+                [innerHtml]="notification.recipients.length == '2' ? ('notifications-switch.both' | translate) : notification.recipients"></span>
+        </div>
+        <div class="col-xs-4 text-center">
+          <span title="{{notification.trigger.name}}">
+          <svg class="icon icon-16"><use xlink:href="#icon-ask-16"></use></svg>
+          </span>
+        </div>
+        <div class="col-xs-4 text-center" [innerHtml]="notification.reminder/86400 | days"></div>
+      </div>
+    </div>
+    <div class="col-xs-1 text-center">
+      <input class="form-control-toggle input-sm" id="notificationActiveState_{{i}}" [checked]="notification.enabled"
+             [value]="notification.enabled" [disabled]="notification.disabled" type="checkbox" (change)="switchNotificationState(notification)">
+      <label for="notificationActiveState_{{i}}"></label>
+    </div>
+    <div class="col-xs-2 text-center">
+      <div class="btn-group">
+        <button class="btn btn-blue btn-sm" type="button"
+                [innerHtml]="'notifications-switch.action' | translate"></button>
+        <button aria-expanded="false" aria-haspopup="true" class="btn btn-blue btn-sm dropdown-toggle"
+                data-toggle="dropdown" type="button">
+          <svg class="icon icon-16">
+            <use xlink:href="#icon-arrow-down-small-16"></use>
+          </svg>
+        </button>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <a [routerLink]="['./', {outlets: {'modal': ['edit', 'view', {app: notification.application.uuid, note: notification.uuid}]}}]"
+               [innerHtml]="'notifications-switch.edit' | translate"></a>
+          </li>
+          <li><a [href]="'#'" (click)="notificationDelete($event, notification, i)"
+                 [innerHtml]="'notifications-switch.delete' | translate"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet name="modal"></router-outlet>
+
+

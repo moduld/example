@@ -1,0 +1,93 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flexbox();
+  @include payever_absolute(0);
+  left: $pe_hgrid_gutter * 12;
+  background-color: rgba(255,255,255,.75);
+}
+.component_wrapp {
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+  @include pe_flex-grow(1);
+}
+.chat_body {
+  @include pe_flex-grow(1);
+  overflow-y: auto;
+  padding: $pe_hgrid_gutter;
+  position: relative;
+}
+.messages_loading {
+  position: relative;
+  padding: $pe_hgrid_gutter 0;
+}
+.chat_footer {
+  @include pe_flexbox();
+  @include pe_align-items(center);
+  @include pe_flex-shrink(0);
+  padding: $margin_adjust $pe_hgrid_gutter $margin_adjust * 3;
+}
+.textinput_wrapp {
+  @include pe_flex-grow(1);
+  background-color: $pe_color_white;
+  border-radius: $pe_border_radius * 5;
+
+}
+.smiles_position_wrapp {
+  position: relative;
+  padding-right: $pe_hgrid_gutter * 2;
+  line-height: $pe_vgrid_height;
+}
+.lurking_block {
+  @include pe_flexbox();
+  padding: $pe_vgrid_height;
+}
+.lurking_block_info {
+  @include pe_flex-grow(1);
+  width: 0;
+}
+.reply_message_text {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text_input {
+  white-space: pre-line;
+  padding: $pe_vgrid_height;
+  outline: none;
+  line-height: $pe_vgrid_height * 2;
+  max-height: $pe_vgrid_height * 10;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  display: block;
+  color: $pe_color_gray_3;
+}
+.smiles {
+  position: absolute;
+  top: 50%;
+  right: $pe_hgrid_gutter;
+  transform: translate3d(50%, -50%, 0);
+}
+.icons-row {
+  @include pe_flex-shrink(0);
+}
+.copy_to_clipboard_area {
+  height: 0;
+  width: 0;
+  position: fixed;
+  top: -100%;
+}
+
+
+@media screen and (max-width: $pe_viewport_breakpoint_xs_2){
+  .text_input{
+    height: $pe_vgrid_height * 6;
+  }
+}

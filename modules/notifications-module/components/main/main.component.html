@@ -1,0 +1,19 @@
+<ui-layout-app [noPadding]="true" [noHeaderBorder]="true">
+  <ui-layout-header header [notTransparent]="true">
+    <div col-left>
+      <a (click)="goToDashboard()">
+        <svg class="icon icon-24">
+          <use xlink:href="#icon-dashboard-24"></use>
+        </svg>
+      </a>
+    </div>
+    <div col-right>
+      <button class="btn btn-primary btn-link btn-vmargin" type="button" (click)="openAddModal()">
+        <svg class="icon icon-24">
+          <use xlink:href="#icon-plus-24"></use>
+        </svg>
+      </button>
+    </div>
+  </ui-layout-header>
+  <router-outlet></router-outlet>
+</ui-layout-app>

@@ -1,0 +1,64 @@
+<div class="component_wrapp">
+    <div class="chat_body" #chatWrapp scrollEndDetection [heightDiff]="20" (scrollTop)="onParamsChange($event)">
+        <div class="loader_64" *ngIf="isLoaderActive"></div>
+        <message-item *ngFor="let message of messages; let i = index"
+                      [message]="message"
+                      [dropup]="i === messages.length - 1"
+                      (onActionClick)="handleOnMessageAction($event, i)"></message-item>
+    </div>
+    <div class="chat_footer">
+        <div class="textinput_wrapp">
+            <div class="lurking_block" *ngIf="repliedMessage || uploadedFile">
+                <div class="lurking_block_info" *ngIf="repliedMessage">
+                    <p class="no-margin btn-link" [innerHtml]="repliedMessage.user.name"></p>
+                    <p class="reply_message_text" [innerHtml]="repliedMessage.body"></p>
+                </div>
+                <div class="lurking_block_info" *ngIf="uploadedFile">
+                    <p class="no-margin btn-link" [innerHtml]="uploadedFile.name"></p>
+                    <progressbar [value]="uploadedFile.progress" [max]="100" class="progress-sm"></progressbar>
+                </div>
+                <button type="button" class="btn btn-default btn-link btn-vmargin" *ngIf="repliedMessage" (click)="cancelLarkingBlockAction()">
+                    <svg class="icon icon-16"><use xlink:href="#icon-x-16"></use></svg>
+                </button>
+            </div>
+            <div class="smiles_position_wrapp">
+                <div contenteditable="true" #contentEditableField class="text_input" placeholder="Message"
+                     (input)="contentEditable = $event.target.textContent"
+                     (paste)="compileToPlain($event)"
+                     carretToEnd [actionSubscription]="moveCarretToEnd"></div>
+                <span class="smiles">
+                <svg class="icon icon-24"><use xlink:href="#icon-msgr-emoji-24"></use></svg>
+            </span>
+            </div>
+        </div>
+        <div class="container-fluid icons-row">
+            <div class="row">
+                <button type="button" class="btn btn-link btn-default" *ngIf="!productsOutletStateEnabled"
+                        [routerLink]="[{ outlets: { products_outlet: ['products']}}]">
+                    <svg class="icon icon-24" ><use xlink:href="#icon-dock-stores-24"></use></svg>
+                </button>
+                <button type="button" class="btn btn-link btn-default btn-primary" *ngIf="productsOutletStateEnabled"
+                        [routerLink]="[{ outlets: { products_outlet: null}}]">
+                    <svg class="icon icon-24"><use xlink:href="#icon-msgr-shop-24"></use></svg>
+                </button>
+
+                <input type="file" name="message_file" class="hidden" accept="image/png,image/jpeg" id="add_files" #addFilesInput (change)="onFileChanged($event)">
+                <label for="add_files" class="btn btn-link btn-default no-margin" *ngIf="!productsOutletStateEnabled">
+                    <svg class="icon icon-24"><use xlink:href="#icon-msgr-attach-24"></use></svg>
+                </label>
+                <button type="button" class="btn btn-link btn-default" *ngIf="!productsOutletStateEnabled"
+                        [routerLink]="[{ outlets: { apps_outlet: !appsOutletStateEnabled ? ['apps'] : null } }]"
+                        [ngClass]="{'btn-primary': appsOutletStateEnabled}">
+                    <svg class="icon icon-24"><use xlink:href="#icon-msgr-apps-24"></use></svg>
+                </button>
+                <button type="button" class="btn btn-link btn-default" *ngIf="contentEditable"
+                        (click)="sendMessage()">
+                    <svg class="icon icon-24"><use xlink:href="#icon-signin-24"></use></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <router-outlet name="apps_outlet"></router-outlet>
+    <textarea class="copy_to_clipboard_area" #copyToClipboardTextArea></textarea>
+</div>
+<router-outlet name="products_outlet"></router-outlet>

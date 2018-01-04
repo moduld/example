@@ -1,0 +1,66 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flex-grow(1);
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+}
+.component_wrapper{
+  position: relative;
+  @include pe_flex-grow(1);
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+}
+.search_container {
+  padding: $pe_vgrid_height;
+}
+.contacts {
+  @include pe_flex-grow(1);
+  overflow-y: auto;
+}
+.contact {
+  padding: $margin_adjust * 2 $margin_adjust * 3;
+  cursor: pointer;
+  transition: $pe_duration_complex;
+  border-radius: $margin_adjust;
+  white-space: nowrap;
+  color: $pe_color_gray;
+  @include pe_flexbox();
+  @include pe_justify-content(space-between);
+  &:hover {
+    background: $pe_color_light_gray_2_rgba;
+  }
+}
+.active_contact {
+  background: $pe_color_light_gray_2_rgba;
+}
+.circle_element {
+  background-color: $pe_color_very_light_gray;
+  min-width: $pe_vgrid_height * 2;
+  border-radius: $pe_vgrid_height;
+}
+.date {
+  color: $pe_color_gray_3;
+}
+.tip_position {
+  @include payever_absolute(0);
+  left: $pe_hgrid_gutter * 12;
+  @include pe_flexbox();
+  @include pe_justify-content(center);
+  @include pe_align-items(center);
+  background-color: rgba(255,255,255,.75);
+}
+.not-clickable {
+  pointer-events: none;
+}
+.forward_to_tip {
+  z-index: 1;
+  background-color: rgba($pe_color_dark_gray, .7);
+  h1 {
+    color: $pe_color_white;
+  }
+}
+.with_line {
+  border-top: 1px solid $pe_color_white;
+}

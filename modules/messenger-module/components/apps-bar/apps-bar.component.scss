@@ -1,0 +1,28 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flex-shrink(0);
+}
+.apps_container {
+  @include pe_flexbox();
+  @include pe_align-items(center);
+  @include pe_justify-content(center);
+  transition: $pe_duration_complex;
+  height: 0;
+  overflow: hidden;
+  padding: $pe_vgrid_height 0;
+  background-color: $pe_color_very_light_gray;
+  &.show_apps {
+    height: $pe_vgrid_height * 12;
+  }
+}
+.img_wrapp {
+  margin: 0 $pe_vgrid_height;
+  img {
+    display: block;
+  }
+}
+.app_name {
+  margin-top: $margin_adjust;
+}

@@ -1,0 +1,27 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+  border-radius: 0 0 $pe_border_radius * 2 0;
+  background-color: $pe_color_white;
+  padding-bottom: $pe_border_radius * 2;
+  height: 100%;
+}
+.margin-null {
+  margin: 0;
+}
+.filters-bar{
+  background-color:  $pe_color_very_light_gray;
+}
+.vertical-alighn{
+  @include pe_flexbox();
+  @include pe_align-items(center);
+}
+.content-container{
+  @include pe_flex();
+  overflow-y: auto;
+  height: $pe_hgrid_gutter;
+  position: relative;
+}

@@ -1,0 +1,43 @@
+<div class="products_wrapp">
+  <div class="filters_wrapp">
+
+    <div class="btn-group dropdown_container">
+      <input type="checkbox" id="dropToggler" class="drop_state_toggle" hidden>
+      <label for="dropToggler" class="btn dropdown-toggle">
+        <svg class="icon icon-16"><use xlink:href="#icon-filters-16"></use></svg>
+        Add Filter
+      </label>
+      <div class="dropdown-menu">
+        <ul>
+          <li><a class="dropdown-item" href="#" (click)="filterProducts($event)">Action</a></li>
+          <li><a class="dropdown-item" href="#" (click)="filterProducts($event)">Another action</a></li>
+          <li><a class="dropdown-item" href="#" (click)="filterProducts($event)">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="search_field_wrapp">
+      <div class="form-design form-widget form_design_modify" [ngClass]="{'opened_input': opened_input}">
+        <input class="form-control" id="filterFieldId" placeholder="Keywords" [(ngModel)]="search_field" type="text">
+      </div>
+
+      <span class="search_button" (click)="searchButtonClick()">
+      <svg class="icon icon-16"><use xlink:href="#icon-search-16"></use></svg>
+    </span>
+    </div>
+  </div>
+
+  <div class="products">
+
+    <div class="form-widget form-design product_item" *ngFor="let prod of products; let i = index">
+      <div class="check_position">
+        <input id="check_{{i}}" name="{{prod.id}}" type="checkbox" [(ngModel)]="prod.state" (ngModelChange)="changedModel(prod)">
+        <label for="check_{{i}}"></label>
+      </div>
+      <img [src]="prod.img" alt="product" class="product_img">
+      <span class="product_name">{{prod.name}}</span>
+    </div>
+
+  </div>
+  <button class="btn btn-default btn-xl btn-vmargin" [ngClass]="{'btn-blue': addedProducts.length}"  [disabled]="!addedProducts.length" (click)="prodFormSubmit()" type="button">Send products</button>
+</div>

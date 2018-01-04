@@ -1,0 +1,56 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flex();
+  border-radius: 0 0 $pe_border_radius * 2 $pe_border_radius * 2;
+}
+.full-height {
+  height: 100%;
+}
+.aside {
+  background-color: $pe_color_very_light_gray;
+  border-radius: 0 0 0 $pe_border_radius * 2;
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+}
+.select_title {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.selector {
+  margin-top: $pe_vgrid_height * 2;
+  border-bottom: 1px solid $pe_color_light_gray_1;
+}
+.contacts_list_wrapp {
+  overflow-y: auto;
+  padding: 0 $pe_hgrid_gutter 0;
+  @include pe_flex-grow(1);
+  height: $pe_hgrid_gutter;
+  position: relative;
+}
+.contact {
+  padding: $margin_adjust $margin_adjust * 3;
+  cursor: pointer;
+  transition: $pe_duration_complex;
+  border-radius: $margin_adjust;
+  white-space: nowrap;
+  &:hover {
+    background: $pe_color_light_gray_2_rgba;
+  }
+  &:first-child {
+    margin-top: $pe_hgrid_gutter;
+  }
+}
+.active_contact {
+  background: $pe_color_light_gray_2_rgba;
+}
+.output_window {
+  background-color: $pe_color_white;
+  border-radius: 0 0 $pe_border_radius * 2 0;
+  position: relative;
+}

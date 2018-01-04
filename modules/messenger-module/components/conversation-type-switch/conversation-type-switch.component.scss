@@ -1,0 +1,39 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flexbox();
+  height: 100%;
+  @include pe_flex-grow(1);
+  position: relative;
+}
+.contacts_selector {
+  width: $pe_hgrid_gutter * 12;
+  padding: 0 $margin_adjust * 3;
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+  background-color: rgba(255,255,255,0.85);
+}
+.links-container {
+  @include pe_flexbox();
+  @include pe_justify-content(space-between);
+  border-bottom: 1px solid $pe_color_light_gray_1;
+}
+.btn-bold {
+  font-weight: bold;
+  height: 43px;
+  line-height: 43px;
+  &.btn-primary {
+    color: $pe_color_black;
+  }
+}
+.underlined {
+  margin-bottom: -1px;
+  border-radius: 0;
+  &:hover {
+    border-bottom: 1px solid $pe_color_blue;
+  }
+  &.btn-primary {
+    border-bottom: 1px solid $pe_color_blue;
+  }
+}

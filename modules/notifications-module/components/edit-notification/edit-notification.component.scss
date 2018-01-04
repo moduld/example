@@ -1,0 +1,40 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  display: block;
+}
+.margin-null {
+  margin: 0;
+}
+.vertical-align {
+  @include pe_flexbox();
+  @include pe_align-items(center);
+}
+.notification_wrapper {
+  background-color: $pe_color_gray;
+  border-radius: $pe_border_radius * 2;
+  width: $pe_hgrid_gutter * 16;
+  margin: auto;
+}
+.form_side {
+  padding-left: $pe_hgrid_gutter;
+  border-left: 1px solid $pe_color_light_gray_2;
+}
+.skippable {
+  pointer-events: none;
+}
+@media screen and (max-width: $pe_viewport_breakpoint_sm_3) {
+  .vertical-align {
+    display: block;
+  }
+  .form_side {
+    padding: 0;
+    border: none;
+  }
+}
+@media screen and (max-width: $pe_viewport_breakpoint_xs_2) {
+  .notification_wrapper {
+    width: 100%;
+  }
+}

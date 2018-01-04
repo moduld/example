@@ -1,0 +1,198 @@
+<div class="modal-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3 text-center">
+        <h3 class="modal-title subheading text-secondary margin-null" [innerHtml]="title"></h3>
+      </div>
+      <div class="col-xs-3 text-right">
+        <label class="btn btn-lg btn-primary btn-link margin-null" for="submit-form"
+                [innerHtml]="'edit-notification.save' | translate"></label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-body">
+  <div class="loader_64" *ngIf="isLoaderActive"></div>
+  <div class="container-fluid" [ngClass]="{'invisible': isLoaderActive}">
+    <div class="row vertical-align">
+      <div class="col-sm-12 col-md-6">
+        <div class="notification_wrapper">
+          <div class="notify2 margin-null">
+            <div class="notify2-text">
+              <div class="notify2-img">
+                <img class="profile-32" *ngIf="notification.application.logo" [src]="notification.application.logo"
+                     alt="">
+                <span class="profile-32" *ngIf="!notification.application.logo">
+                   <svg class="icon icon-32"><use xlink:href="#icon-settings-48"></use></svg>
+                </span>
+              </div>
+              <h4 [innerHtml]="notification.headline || ('edit-notification.title_notification' | translate)"></h4>
+              <p [innerHtml]="notification.subline || ('edit-notification.description_notification' | translate)"></p>
+            </div>
+            <div class="notify2-controls notify2-controls-x2">
+              <div class="notify2-control-container">
+                <button class="action">
+                  <a class="btn btn-default btn-link" target="_blank"
+                     [ngClass]="{'skippable': notification.actions[0].type === 'skip' || !notification.actions[0].link}"
+                     [href]="notification.actions[0].link"
+                     [innerHtml]="notification.actions[0].name || ('edit-notification.button_name' | translate)"></a>
+                </button>
+              </div>
+              <div class="notify2-control-container" *ngIf="notification.actions[1] && notification.actions[1].type">
+                <button class="action">
+                  <a class="btn btn-default btn-link" target="_blank"
+                     [ngClass]="{'skippable': notification.actions[1].type === 'skip' || !notification.actions[1].link}"
+                     [href]="notification.actions[1].link"
+                     [innerHtml]="notification.actions[1].name || ('edit-notification.button_name' | translate)"></a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <form class="form_side" #notificationForm="ngForm" id="notificationFormId" (ngSubmit)="submitForm($event)">
+          <div class="form-design form-widget labeled"
+               [ngClass]="{'has-error': inputHeadline.invalid && inputHeadline.dirty}">
+            <input class="form-control" id="InputFirst" name="headline"
+                   placeholder="{{'edit-notification.headline' | translate}}" #inputHeadline="ngModel"
+                   [(ngModel)]="notification.headline" maxlength="33" type="text" required>
+            <label class="control-label small" for="InputFirst"
+                   [innerHtml]="'edit-notification.headline' | translate"></label>
+          </div>
+          <div class="form-design form-widget labeled"
+               [ngClass]="{'has-error': inputSubline.invalid && inputSubline.dirty}">
+            <input class="form-control" id="InputSeconde" name="subline"
+                   placeholder="{{'edit-notification.subline' | translate}}" #inputSubline="ngModel"
+                   [(ngModel)]="notification.subline" maxlength="100" type="text" required>
+            <label class="control-label small" for="InputSeconde"
+                   [innerHtml]="'edit-notification.subline' | translate"></label>
+          </div>
+          <div class="form-design form-widget labeled"
+               [ngClass]="{'has-error': selectRecipient.invalid && selectRecipient.dirty}">
+            <select class="form-control" id="select_recipient" name="recipient" #selectRecipient="ngModel"
+                    [(ngModel)]="notification.recipients" required>
+              <option value="" selected disabled
+                      [innerHtml]="'edit-notification.select_recipient' | translate"></option>
+              <option [value]="['private']" [innerHtml]="'edit-notification.private' | translate"></option>
+              <option [value]="['business']" [innerHtml]="'edit-notification.business' | translate"></option>
+              <option [value]="['private', 'business']" [innerHtml]="'edit-notification.both' | translate"></option>
+            </select>
+            <label class="control-label small" for="select_recipient"
+                   [innerHtml]="'edit-notification.select_recipient' | translate"></label>
+          </div>
+          <div class="form-design form-widget labeled"
+               [ngClass]="{'has-error': selectTrigger.invalid && selectTrigger.dirty}">
+            <select class="form-control" id="select_trigger" name="trigger_id" #selectTrigger="ngModel"
+                    [(ngModel)]="notification.trigger.uuid" required>
+              <option value="" selected disabled [innerHtml]="'edit-notification.select_trigger' | translate"></option>
+              <option *ngFor="let trig of triggers" [value]="trig.uuid" [innerHtml]="trig.name"></option>
+            </select>
+            <label class="control-label small" for="select_trigger"
+                   [innerHtml]="'edit-notification.select_trigger' | translate"></label>
+          </div>
+          <div class="form-design form-widget labeled"
+               [ngClass]="{'has-error': selectReminder.invalid && selectReminder.dirty}">
+            <select class="form-control" id="select_reminder" name="reminder" #selectReminder="ngModel"
+                    [(ngModel)]="notification.reminder" required>
+              <option value="" selected disabled
+                      [innerHtml]="'edit-notification.select_reminder' | translate"></option>
+              <option *ngFor="let reminderValue of reminderValues" [value]="reminderValue * 86400" [innerHtml]="reminderValue | days"></option>
+            </select>
+            <label class="control-label small" for="select_reminder"
+                   [innerHtml]="'edit-notification.select_reminder' | translate"></label>
+          </div>
+          <fieldset ngModelGroup="action1">
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled">
+                  <select class="form-control" id="select_button_type1" name="action_type"
+                          [(ngModel)]="notification.actions[0].type" required>
+                    <option value="" selected disabled
+                            [innerHtml]="'edit-notification.action_type' | translate"></option>
+                    <option value="app" [innerHtml]="'edit-notification.link' | translate"></option>
+                    <option value="skip" *ngIf="notification.actions[1] && notification.actions[1].type !== 'skip'"
+                            [innerHtml]="'edit-notification.skip' | translate"></option>
+                  </select>
+                  <label class="control-label small" for="select_button_type1"
+                         [innerHtml]="'edit-notification.action_type' | translate"></label>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled"
+                     [ngClass]="{'has-error': inputButName1.invalid && inputButName1.dirty}">
+                  <input class="form-control" #inputButName1="ngModel" id="InputButName1" name="action_name"
+                         placeholder="{{'edit-notification.action_name' | translate}}"
+                         [disabled]="!notification.actions[0].type"
+                         [(ngModel)]="notification.actions[0].name" maxlength="22" type="text" required>
+                  <label class="control-label small" for="InputButName1"
+                         [innerHtml]="'edit-notification.action_name' | translate"></label>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled"
+                     [ngClass]="{'has-error': inputButLink1.invalid && inputButLink1.dirty}">
+                  <input class="form-control" #inputButLink1="ngModel" id="InputButLink1" name="action_link"
+                         placeholder="{{'edit-notification.action_link' | translate}}"
+                         [disabled]="!notification.actions[0].type || notification.actions[0].type === 'skip'"
+                         [(ngModel)]="notification.actions[0].link" type="text" required>
+                  <label class="control-label small" for="InputButLink1"
+                         [innerHtml]="'edit-notification.action_link' | translate"></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset ngModelGroup="action2"
+                    [disabled]="!notification.actions[0].type || notification.actions[0].type === 'link' &&
+                     !(notification.actions[0].name && notification.actions[0].link) ||
+                      notification.actions[0].type === 'skip' && !notification.actions[0].name">
+            <div class="row">
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled">
+                  <select class="form-control" id="select_button_type2" name="action_type"
+                          [attr.required]="notification.actions[1].type ? true : null"
+                          [(ngModel)]="notification.actions[1].type"
+                          [disabled]="!notification.actions[0].type || notification.actions[0].type === 'app' &&
+                           !(notification.actions[0].name && notification.actions[0].link) ||
+                            notification.actions[0].type === 'skip' && !notification.actions[0].name">
+                    <option value="" selected [innerHtml]="'edit-notification.action_type' | translate"></option>
+                    <option value="app" [innerHtml]="'edit-notification.link' | translate"></option>
+                    <option value="skip" *ngIf="notification.actions[0].type !== 'skip'"
+                            [innerHtml]="'edit-notification.skip' | translate"></option>
+                  </select>
+                  <label class="control-label small" for="select_button_type2"
+                         [innerHtml]="'edit-notification.action_type' | translate"></label>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled"
+                     [ngClass]="{'has-error': inputButName2.invalid && inputButName2.dirty}">
+                  <input class="form-control" #inputButName2="ngModel" id="InputButName2" name="action_name"
+                         placeholder="Action name"
+                         [(ngModel)]="notification.actions[1].name"
+                         [disabled]="!notification.actions[1].type" maxlength="22" type="text" required>
+                  <label class="control-label small" for="InputButName2"
+                         [innerHtml]="'edit-notification.action_name' | translate"></label>
+                </div>
+              </div>
+              <div class="col-xs-4">
+                <div class="form-design form-widget labeled"
+                     [ngClass]="{'has-error': inputButLink2.invalid && inputButLink2.dirty}">
+                  <input class="form-control" #inputButLink2="ngModel" id="InputButLink2" name="action_link"
+                         placeholder="Action link"
+                         [(ngModel)]="notification.actions[1].link"
+                         [disabled]="!notification.actions[1].type || notification.actions[1].type === 'skip'"
+                         type="text" required>
+                  <label class="control-label small" for="InputButLink2"
+                         [innerHtml]="'edit-notification.action_link' | translate"></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <input type="submit" id="submit-form" hidden>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

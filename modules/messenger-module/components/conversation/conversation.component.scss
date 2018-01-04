@@ -1,0 +1,26 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+.messenger_main {
+  height: 100%;
+  @include pe_flexbox();
+  position: relative;
+}
+.aside {
+  width: $pe_hgrid_gutter * 10;
+  color: $pe_color_gray;
+  position: relative;
+  padding-top: $pe_hgrid_gutter;
+  transition: $pe_duration_complex;
+  background-color: rgba(255, 255, 255, .7);
+  &.exquisite {
+    width: $pe_hgrid_gutter * 3;
+  }
+}
+.btn-bold {
+  font-weight: bold;
+  &.btn-primary {
+    color: $pe_color_black;
+  }
+}
+

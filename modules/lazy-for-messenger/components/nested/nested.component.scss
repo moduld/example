@@ -1,0 +1,18 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+}
+.contacts-rows {
+  padding: $pe_vgrid_height;
+  border-bottom: 1px solid $pe_color_light_gray_1;
+}
+.scroll-container {
+  overflow-y: auto;
+}
+.selected-bar {
+  background-color: $pe_color_blue;
+  padding: $pe_vgrid_height 0;
+}

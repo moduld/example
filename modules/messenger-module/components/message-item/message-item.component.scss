@@ -1,0 +1,106 @@
+@import '~@pe/ui-kit/scss/pe_variables';
+@import '~@pe/ui-kit/scss/pe_mixins';
+
+:host {
+  display: block;
+  margin-top: $pe_hgrid_gutter;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+.user_message {
+  width: 50%;
+  min-width: $pe_hgrid_gutter * 18;
+  margin-left: auto;
+}
+.sender_name {
+  margin: 0;
+  padding: 0 $pe_vgrid_height;
+}
+.vertical-alighn {
+  @include pe_flexbox();
+  @include pe_align-items(center);
+}
+.reversed {
+  @include pe_flex-direction(row-reverse);
+}
+.message_wrapp {
+  margin-top: $pe_vgrid_height;
+  background-color: $pe_color_blue;
+  color: $pe_color_white;
+  padding: $margin_adjust * 2 $pe_hgrid_gutter * 2 $margin_adjust * 2 $margin_adjust * 2;
+  border-radius: $margin_adjust * 1.5;
+  position: relative;
+}
+.message {
+  white-space: pre-line;
+  margin: 0;
+}
+.media_wrapp {
+  display: block;
+  margin-top: $pe_vgrid_height;
+  overflow: hidden;
+}
+.media_image {
+  height: 100%;
+}
+.reply_inside_message_block {
+  margin-right: $pe_vgrid_height;
+  padding: $margin_adjust;
+  border-left: $margin_adjust / 2 solid $pe_color_white;
+}
+.reply_not_myne {
+  border-left: $margin_adjust / 2 solid $pe_color_light_gray_1;
+  margin-right: 0;
+}
+.message_menu_wrapp {
+  @include payever_absolute();
+  left: auto;
+  width: $pe_hgrid_gutter * 2;
+  @include pe_flexbox();
+  @include pe_flex-direction(column);
+  @include pe_justify-content(space-between);
+  @include pe_align-items(center);
+}
+.not_myne_message {
+  margin-left: 0;
+  margin-right: auto;
+  .message_wrapp {
+    padding: $margin_adjust * 2 $margin_adjust * 2 $margin_adjust * 2 $pe_hgrid_gutter * 2;
+    background-color: rgba(255,255,255,0.3);
+    color: $pe_color_gray;
+  }
+  .message_menu_wrapp {
+    right: auto;
+    left: 0;
+  }
+}
+.btn-white {
+  &.btn-link.btn-default {
+    color: $pe_color_white;
+  }
+}
+.profile-48 {
+  &.profile-default-text {
+    font-size: 24px;
+
+  }
+}
+//@media screen and (max-width: $pe_viewport_breakpoint_md_1){
+//  .user_message {
+//    min-width: $pe_hgrid_gutter * 14;
+//  }
+//}
+//
+//@media screen and (max-width: $pe_viewport_breakpoint_sm_3){
+//  .user_message{
+//    min-width: $pe_hgrid_gutter * 18;
+//  }
+//}
+//
+//@media screen and (max-width: $pe_viewport_breakpoint_sm_1){
+//  .user_message{
+//    min-width: 100%;
+//    width: 100%;
+//  }
+//}
