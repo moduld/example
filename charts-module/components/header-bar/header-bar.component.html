@@ -1,0 +1,133 @@
+<div class="row header-bar">
+  <div class="col-xs-12 col-sm-7 filter-header border-right" (click)="toggleFilterPanelState(true)">
+    <h2>{{title}}</h2>
+  </div>
+  <div class="col-xs-12 col-sm-5 dates-wrapp"
+       (click)="toggleDateSelector()"
+       [ngClass]="{'activated': isDateSelectorActivated}">
+      <i class="fa fa-calendar"></i>
+      <h2>{{titleDates.start}}</h2> - <h2>{{titleDates.end}}</h2>
+  </div>
+</div>
+<div class="row filters-wrapp" *ngIf="isFiltersShown && isFiltersActivated">
+  <div class="container-fluid">
+    <div class="row text-right">
+        <div class="btn close-button" (click)="toggleFilterPanelState(false)">
+          <i class="fa fa-times"></i>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group form-group-modify">
+          <label>Widget Title</label>
+          <input type="text" class="form-control form-control-modify" [(ngModel)]="filtersModelObject.widgettitle">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group form-group-modify">
+          <label>Widget Shows</label>
+          <input type="text" class="form-control form-control-modify" [(ngModel)]="filtersModelObject.widgetshows">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group form-group-modify">
+          <label>Status</label>
+          <select type="text" class="form-control form-control-modify" [(ngModel)]="filtersModelObject.requeststatusid">
+            <option value="">All</option>
+            <option *ngFor="let status of statusesData" value="{{status.id}}">{{status.value}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group form-group-modify">
+          <label>Business</label>
+          <select type="text" class="form-control form-control-modify" [(ngModel)]="filtersModelObject.businessid">
+            <option value="">All</option>
+            <option *ngFor="let business of businessData" value="{{business.id}}">{{business.value}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group form-group-modify">
+          <label>Region</label>
+          <select type="text" class="form-control form-control-modify" [(ngModel)]="filtersModelObject.locationid">
+            <option value="">Global</option>
+            <option *ngFor="let region of regionsData" value="{{region.id}}">{{region.value}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group form-group-modify">
+          <label>View By</label>
+          <select type="text" class="form-control form-control-modify">
+            <option value="quarter">Quarter</option>
+            <option value="semi–annual">Semi – Annual</option>
+            <option value="annual">Annual</option>
+            <option value="bi-annual">Bi - Annual</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row buttons-wrapp">
+      <div class="col-xs-6">
+        <button class="btn btn-primary btn-modify hidden">COPY WIDGET</button>
+      </div>
+      <div class="col-xs-6 text-right">
+        <button class="btn btn-primary btn-modify" (click)="applyDateFilters()">SAVE CHANGES</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="dates-filters" *ngIf="isDateSelectorActivated">
+  <div class="container-fluid border-bottom">
+    <div class="row elements-margins">
+        <div class="form-group">
+          <select class="form-control form-control-modify" [(ngModel)]="filtersModelObject.appliedDateValue" (change)="timeRangeChanged()">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="7days">Last 7 Days</option>
+            <option value="30days">Last 30 Days</option>
+            <option value="month">This Month</option>
+            <option value="year">This Year</option>
+            <option value="custom">Custom Range</option>
+          </select>
+        </div>
+    </div>
+  </div>
+  <div class="container-fluid border-bottom">
+    <fieldset class="elements-margins" [disabled]="filtersModelObject.appliedDateValue !== 'custom'">
+      <div class="form-group margin-bottom-null">
+        <label>From</label>
+      </div>
+      <input type="text" name="from" class="hidden" appDatePicker
+             (inputValueChanged)="customDatesChanged($event, 'start')"
+             [initialValue]="filtersModelObject.fromdate">
+    </fieldset>
+  </div>
+<div class="container-fluid">
+  <fieldset class="elements-margins" [disabled]="filtersModelObject.appliedDateValue !== 'custom'">
+    <div class="form-group margin-bottom-null">
+      <label>To</label>
+    </div>
+    <input type="text" name="to" class="hidden" appDatePicker
+           (inputValueChanged)="customDatesChanged($event, 'end')"
+           [initialValue]="filtersModelObject.todate">
+  </fieldset>
+  <span class="error" *ngIf="showError">The date must be later than the previous one</span>
+</div>
+<div class="container-fluid">
+  <div class="row buttons-wrapp">
+    <div class="col-xs-6 text-left">
+      <button class="btn btn-primary btn-modify" (click)="applyDateFilters()">APPLY</button>
+    </div>
+  </div>
+</div>
+</div>

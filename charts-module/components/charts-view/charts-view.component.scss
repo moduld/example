@@ -1,0 +1,68 @@
+.charts_body {
+  background-color: white;
+  padding: 34px;
+  //border-top: 1px solid #d6e0ea;
+}
+.charts_columns_titles {
+  color: #77858e;
+}
+.charts_year {
+  margin-top: 18px;
+  color: #77858e;
+  padding: 5px 0;
+  border-top: 1px solid #d6e0ea;
+  border-bottom: 1px solid #d6e0ea;
+
+}
+.charts_items {
+  margin-top: 18px;
+  &:last-child {
+    margin-bottom: 18px;
+  }
+}
+.map_side {
+  position: relative;
+  width: 100%;
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 60%;
+  }
+}
+.map_wripper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url("../../../../../assets/images/graph5.png") center center no-repeat;
+  background-color: white;
+  background-size: 90%;
+}
+.values {
+  position: absolute;
+  transform: translateX(15px);
+  line-height: 12px;
+}
+.vertical_chart {
+  position: absolute;
+  //border: 1px solid white;
+  width: 10px;
+  height: 15%;
+}
+.left-top {
+  left: 20%;
+  bottom: 60%;
+}
+.left-bottom {
+  left: 32%;
+  bottom: 35%;
+}
+.right-bottom {
+  left: 82%;
+  bottom: 28%;
+}
+.right-top {
+  left: 70%;
+  bottom: 58%;
+}

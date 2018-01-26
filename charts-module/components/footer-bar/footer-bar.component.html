@@ -1,0 +1,6 @@
+<div class="row charts_footer">
+    <div class="legend_wrapp" *ngFor="let legend of legends" (click)="toggleLegendVisibility(legend.name)">
+      <span class="legend_dot" [ngStyle]="{'background-color': '#' + legend.color}"></span>
+      <span class="charts_legend">{{legend.name}}</span>
+    </div>
+</div>

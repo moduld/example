@@ -1,0 +1,3 @@
+<app-header-bar [title]="title" [isFiltersActivated]="isFiltersActivated"></app-header-bar>
+<app-charts-view #charts="chartsView" [isMappedSide]="isMappedSide"></app-charts-view>
+<app-footer-bar (toggleTimeLIneVisibility)="charts.filterDataByLegends($event)"></app-footer-bar>

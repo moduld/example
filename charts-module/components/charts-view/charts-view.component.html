@@ -1,0 +1,205 @@
+
+<div class="row" *ngIf="!isMappedSide">
+  <div class="col-xs-12 charts_body">
+
+    <div class="container-fluid charts_columns_titles">
+      <div class="row">
+        <div class="col-xs-2 text-left">Period</div>
+        <div class="col-xs-7 text-left">Requests</div>
+        <div class="col-xs-3 text-left">Total</div>
+      </div>
+    </div>
+
+    <div class="container-fluid" *ngFor="let year of horisontalChartsData">
+      <div class="row charts_year">
+        <div class="col-xs-12">{{year.year}}</div>
+      </div>
+
+      <div class="row charts_items" *ngFor="let request of year.requests; let i = index">
+        <div class="col-xs-2 text-left" [innerHtml]="request.name"></div>
+        <div class="col-xs-7">
+          <app-progressbar *ngFor="let progress of request.series; let j = index"
+                  [progressValue]="(progress.value / year.maxValue) * 100"
+                  [progressColor]="progress.color"
+                  [position]="'horizontal'"
+                  [stacked]="true"
+                  [height]="15"
+                  [transition]="1"
+                  tooltip="{{progress.value}}"></app-progressbar>
+        </div>
+        <div class="col-xs-3 text-left">{{'$' + request.total}}</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+<div class="row" *ngIf="isMappedSide">
+  <div class="col-xs-12 charts_body map_side">
+    <div class="map_wripper">
+
+      <span class="values left-top">$250,000</span>
+      <span class="values left-bottom">$56,000</span>
+      <span class="values right-top">$67,000</span>
+      <span class="values right-bottom">$150,000</span>
+
+      <div class="vertical_chart left-top" #leftTop>
+
+        <app-progressbar
+                [progressValue]="20"
+                [progressColor]="'27a5f9'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftTop"
+                [transition]="1"
+                [bordered]="true"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="25"
+                [progressColor]="'ac60a8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftTop"
+                [transition]="1"
+                [bordered]="true"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="35"
+                [progressColor]="'ffbe00'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftTop"
+                [transition]="1"
+                [bordered]="true"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="15"
+                [progressColor]="'96d3d8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftTop"
+                [transition]="1"
+                [bordered]="true"></app-progressbar>
+      </div>
+
+      <div class="vertical_chart left-bottom" #leftBottom>
+        <app-progressbar
+                [progressValue]="20"
+                [progressColor]="'27a5f9'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="25"
+                [progressColor]="'ac60a8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="35"
+                [progressColor]="'ffbe00'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="15"
+                [progressColor]="'96d3d8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="leftBottom"
+                [transition]="1"></app-progressbar>
+      </div>
+
+      <div class="vertical_chart right-bottom" #rightBottom>
+        <app-progressbar
+                [progressValue]="20"
+                [progressColor]="'27a5f9'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="25"
+                [progressColor]="'ac60a8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="35"
+                [progressColor]="'ffbe00'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightBottom"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="15"
+                [progressColor]="'96d3d8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightBottom"
+                [transition]="1"></app-progressbar>
+      </div>
+
+      <div class="vertical_chart right-top" #rightTop>
+        <app-progressbar
+                [progressValue]="20"
+                [progressColor]="'27a5f9'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightTop"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="25"
+                [progressColor]="'ac60a8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightTop"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="35"
+                [progressColor]="'ffbe00'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightTop"
+                [transition]="1"></app-progressbar>
+
+        <app-progressbar
+                [progressValue]="15"
+                [progressColor]="'96d3d8'"
+                [position]="'vertical'"
+                [stacked]="true"
+                [height]="10"
+                [container]="rightTop"
+                [transition]="1"></app-progressbar>
+      </div>
+
+    </div>
+  </div>
+</div>
+
