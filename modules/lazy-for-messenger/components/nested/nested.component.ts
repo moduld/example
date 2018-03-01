@@ -1,6 +1,6 @@
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
-import {TranslateService} from '@pe/common/modules/i18n';
+
 import {RequestService} from '../../services';
 import { EventsExchangeService } from '../../shared-module/services/events-exchange.service';
 import { ContactsListResponseInterface, PaginationDataInterface, ContactsModel } from '../../../interfaces/lazy-for-messenger.interface';

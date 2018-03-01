@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services';
-import { NotificationService, NotificationConfig } from '@pe/ui-kit/modules/ui-notification';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { RequestService } from '../../services';
-import { TranslateService } from '@pe/common/modules/i18n';
-import { LoaderManagerService } from '@pe/common/modules/common';
+
 import 'rxjs/add/operator/filter';
 import {
   ApplicationsAsideInterface,

@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute, Event } from '@angular/router';
 import { StorageService, WebSocketService } from '../../services';
-import {BusinessInterface } from '@pe/common/modules/business';
-import {ProfileInterface} from '@pe/common/modules/profile';
+
 import {UserInterface, ResolverInterface} from '../../../../interfaces';
 import 'rxjs/add/operator/map';
 

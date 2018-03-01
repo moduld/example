@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as settings from '../../../settings';
-import { NotificationConfig } from '@pe/ui-kit/modules/ui-notification';
+
 import { RestUrlInterface } from '../../../interfaces';
 
 @Injectable()

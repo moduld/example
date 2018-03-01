@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router, ActivatedRoute, NavigationEnd, Event as RouterEvent, Params} from '@angular/router';
-import {ActivatedRouteService} from '@pe/user/src/modules/core';
+
 import {
   StorageService,
   RequestService,

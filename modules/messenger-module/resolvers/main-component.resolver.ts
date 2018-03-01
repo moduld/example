@@ -3,9 +3,7 @@ import {Observer} from 'rxjs/Observer';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
-import { BusinessService, BusinessInterface } from '@pe/common/modules/business';
-import { ProfileService, ProfileInterface, ProfileSettingsInterface } from '@pe/common/modules/profile';
-import {ActivatedRouteService, CoreConfigService} from '@pe/user/src/modules/core';
+
 import {UserInterface, CreateNewUserRequestBodyInterface, ResolverInterface} from '../../../interfaces';
 import {RequestService} from '../services';
 

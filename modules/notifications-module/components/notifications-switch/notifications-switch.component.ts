@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services';
-import { NotificationService, NotificationConfig } from '@pe/ui-kit/modules/ui-notification';
+
 import { RequestService, EventsExchangeService } from '../../services';
-import { TranslateService } from '@pe/common/modules/i18n';
+
 import {
   NotificationInterface,
   NotificationsTriggerCollectionInterface,

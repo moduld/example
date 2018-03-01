@@ -1,4 +1,4 @@
-import { AuthTokenService } from '@pe/common/modules/common';
+
 import { ConfigService } from './config.service';
 import { EventsExchangeService } from './events-exchange.service';
 import { Injectable } from '@angular/core';

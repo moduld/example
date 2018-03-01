@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response, RequestOptionsArgs} from '@angular/http';
-import { AuthTokenService } from '@pe/user/src/modules/shared';
+
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

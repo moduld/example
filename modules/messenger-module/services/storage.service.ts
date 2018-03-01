@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserInterface } from '../../../interfaces';
-import {BusinessInterface } from '@pe/common/modules/business';
-import {ProfileInterface} from '@pe/common/modules/profile';
+
 
 @Injectable()
 export class StorageService {

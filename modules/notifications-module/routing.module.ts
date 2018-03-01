@@ -1,6 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ModalComponent } from '@pe/ui-kit/modules/ui-router-modal';
+
 import { MainComponent, NotificationsSwitchComponent, EditNotificationComponent, AsideComponent } from './components';
 
 const routes: Routes = [

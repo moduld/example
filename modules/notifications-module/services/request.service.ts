@@ -1,4 +1,4 @@
-import { AuthTokenService } from '@pe/common/modules/common';
+
 import { ConfigService } from './config.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response, RequestOptionsArgs } from '@angular/http';
